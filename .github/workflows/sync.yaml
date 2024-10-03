@@ -1,0 +1,70 @@
+# This workflow will sync the API types from the cloudnative-pg repository to the API repository, and
+# tidy the go.mod file.
+# It is supposed to be triggered by a repository_dispatch event whenever the cloudnative-pg api is updated,
+# but can also be triggered manually using the "Sync API" workflow_dispatch event.
+
+name: Sync API
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [ sync-api ]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout API repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.REPO_PAT }}
+
+      - name: Checkout cloudnative-pg repository
+        uses: actions/checkout@v4
+        with:
+          path: cloudnative-pg
+          repository: cloudnative-pg/cloudnative-pg
+          sparse-checkout: api/v1
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file:  cloudnative-pg/go.mod
+
+      - name: Copy types files from cloudnative-pg
+        run: |
+          rm -rf pkg/api/v1
+          mkdir -p pkg/api/v1
+          cp cloudnative-pg/api/v1/*_types.go pkg/api/v1
+          cp cloudnative-pg/api/v1/groupversion_info.go pkg/api/v1
+          cp cloudnative-pg/api/v1/zz_*.go pkg/api/v1
+          cp cloudnative-pg/go.mod cloudnative-pg/go.sum .
+          go mod tidy
+          go vet ./...
+
+      # We want to prevent the "include administrators" branch protection from blocking the commit,
+      # but it should be usually there to avoid accidental pushes to main.
+      - name: Temporarily disable "include administrators" branch protection
+        if: ${{ github.ref == 'refs/heads/main' }}
+        id: disable_include_admins
+        uses: benjefferies/branch-protection-bot@v1.1.2
+        with:
+          access_token: ${{ secrets.REPO_PAT }}
+          branch: main
+          enforce_admins: false
+
+      - uses: EndBug/add-and-commit@v9
+        with:
+          author_name: CloudNativePG Automated Updates
+          author_email: noreply@cnpg.com
+          message: 'chore: sync API'
+          add: pkg/api/v1 go.mod go.sum
+
+      - name: Enable "include administrators" branch protection
+        uses: benjefferies/branch-protection-bot@v1.1.2
+        if: ${{ always() && github.ref == 'refs/heads/main' }}
+        with:
+          access_token: ${{ secrets.REPO_PAT }}
+          branch: main
+          enforce_admins: ${{ steps.disable_include_admins.outputs.initial_status }}
