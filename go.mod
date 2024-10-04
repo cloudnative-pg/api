@@ -1,4 +1,4 @@
-module github.com/cloudnative-pg/cloudnative-pg
+module github.com/cloudnative-pg/api
 
 go 1.22.0
 
