@@ -1,0 +1,26 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":gitSignOff",
+    ":semanticCommitType(chore)",
+    ":labels(automated,no-issue)",
+    "customManagers:githubActionsVersions",
+    ":automergeMinor",
+    ":automergeDigest",
+  ],
+  "semanticCommits": "enabled",
+  "commitBodyTable": true,
+  "gomod": {
+    "enabled": false,
+  },
+  "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+      ],
+      "matchCurrentVersion": "!/^0/"
+    }
+  ]
+}
