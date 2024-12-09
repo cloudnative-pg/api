@@ -1,6 +1,6 @@
 [![CloudNativePG](./logo/cloudnativepg.png)](https://cloudnative-pg.io/)
 
-# New Component for CloudNativePG
+# CloudNativePG API
 
-TODO
+This repository contains the latest version of the CloudNativePG API.
 
