@@ -1,5 +1,5 @@
-github.com/cloudnative-pg/barman-cloud v0.0.0-20241205144020-711113b64258 h1:B/Wncxl/OXrXJUHHtBCyxE//6FdIxznERfzPMsNHWfw=
-github.com/cloudnative-pg/barman-cloud v0.0.0-20241205144020-711113b64258/go.mod h1:HPGwXHlatQEnb2HdsbGTZLEo8qlxKLdxTHiTeF9TTqw=
+github.com/cloudnative-pg/barman-cloud v0.0.0-20241218093921-134c7de4954a h1:VrEa9P/HfA6csNOh0DRlUyeUoKuByV57tLnf2rTIqfU=
+github.com/cloudnative-pg/barman-cloud v0.0.0-20241218093921-134c7de4954a/go.mod h1:HPGwXHlatQEnb2HdsbGTZLEo8qlxKLdxTHiTeF9TTqw=
 github.com/cloudnative-pg/machinery v0.0.0-20241122084004-33b997fc6c61 h1:KzazCP/OVbCPAkhhg9hLLNzLyAHcYzxA3U3wsyLDWbs=
 github.com/cloudnative-pg/machinery v0.0.0-20241122084004-33b997fc6c61/go.mod h1:uBHGRIk5rt07mO4zjIC1uvGBWTH6PqIiD1PfpvPGZKU=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
