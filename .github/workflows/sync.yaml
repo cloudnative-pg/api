@@ -36,11 +36,11 @@ jobs:
         run: |
           rm -rf pkg/api/v1
           mkdir -p pkg/api/v1
-          cp cloudnative-pg/api/v1/*_types.go pkg/api/v1
-          cp cloudnative-pg/api/v1/doc.go pkg/api/v1
-          cp cloudnative-pg/api/v1/groupversion_info.go pkg/api/v1
-          cp cloudnative-pg/api/v1/zz_*.go pkg/api/v1
-          cp cloudnative-pg/go.mod cloudnative-pg/go.sum .
+          cp -v cloudnative-pg/api/v1/*_types.go pkg/api/v1
+          cp -v cloudnative-pg/api/v1/doc.go pkg/api/v1
+          cp -v cloudnative-pg/api/v1/groupversion_info.go pkg/api/v1
+          cp -v cloudnative-pg/api/v1/zz_*.go pkg/api/v1
+          cp -v cloudnative-pg/go.mod cloudnative-pg/go.sum .
           sed -i  '1 s|^.*$|module github.com/cloudnative-pg/api|' go.mod
           go mod tidy
           go vet ./...
