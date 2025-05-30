@@ -10,10 +10,13 @@ on:
   repository_dispatch:
     types: [ sync-api ]
 
+permissions: read-all
+
 jobs:
   sync:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
     steps:
       - name: Checkout API repository
         uses: actions/checkout@v4
