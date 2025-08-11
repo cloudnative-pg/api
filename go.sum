@@ -1,7 +1,7 @@
-github.com/cloudnative-pg/barman-cloud v0.3.1 h1:kzkY77k2lN/caoyh7ibXDSZjJeSJTNvnVt6Gfa8Iq5M=
-github.com/cloudnative-pg/barman-cloud v0.3.1/go.mod h1:4HL3AjY9oEl2Ed0HSkyvTZEQPhwyFOaAnuCz9lfVeYQ=
-github.com/cloudnative-pg/machinery v0.3.0 h1:t1DzXGeK3RUYXS5KWIdIk30oh4EmwxZ+6sWM4wJDBac=
-github.com/cloudnative-pg/machinery v0.3.0/go.mod h1:6NhajP3JlioeecYceVuOBLD2lfsJty8qSZsFpSb/vmA=
+github.com/cloudnative-pg/barman-cloud v0.3.3 h1:EEcjeV+IUivDpmyF/H/XGY1pGaKJ5LS5MYeB6wgGcak=
+github.com/cloudnative-pg/barman-cloud v0.3.3/go.mod h1:5CM4MncAxAjnqxjDt0I5E/oVd7gsMLL0/o/wQ+vUSgs=
+github.com/cloudnative-pg/machinery v0.3.1 h1:KtPA6EwELTUNisCMLiFYkK83GU9606rkGQhDJGPB8Yw=
+github.com/cloudnative-pg/machinery v0.3.1/go.mod h1:jebuqKxZAbrRKDEEpVCIDMKW+FbWtB9Kf/hb2kMUu9o=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1VwoXQT9A3Wy9MM3WgvqSxFWenqJduM=
@@ -43,8 +43,8 @@ github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.84.1 h
 github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.84.1/go.mod h1:MruMqbSS9aYrKhBImrO9X9g52hwz3I0B+tcoeAwkmuM=
 github.com/rogpeppe/go-internal v1.13.1 h1:KvO1DLK/DRN07sQ1LQKScxyZJuNnedQ5/wKSR38lUII=
 github.com/rogpeppe/go-internal v1.13.1/go.mod h1:uMEvuHeurkdAXX61udpOXGD/AzZDWNMNyH2VO9fmH0o=
-github.com/spf13/pflag v1.0.6 h1:jFzHGLGAlb3ruxLB8MhbI6A8+AQX/2eW4qeyNZXNp2o=
-github.com/spf13/pflag v1.0.6/go.mod h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An2Bg=
+github.com/spf13/pflag v1.0.7 h1:vN6T9TfwStFPFM5XzjsvmzZkLuaLX+HS+0SeFLRgU6M=
+github.com/spf13/pflag v1.0.7/go.mod h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An2Bg=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/stretchr/testify v1.10.0 h1:Xv5erBjTwe/5IxqUQTdXv5kgmIvbHo3QQyRwhJsOfJA=
