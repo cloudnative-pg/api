@@ -6,8 +6,8 @@ require (
 	github.com/cloudnative-pg/barman-cloud v0.3.3
 	github.com/cloudnative-pg/machinery v0.3.1
 	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.84.1
-	k8s.io/api v0.33.3
-	k8s.io/apimachinery v0.33.3
+	k8s.io/api v0.33.4
+	k8s.io/apimachinery v0.33.4
 	sigs.k8s.io/controller-runtime v0.21.0
 )
 
