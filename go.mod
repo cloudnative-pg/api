@@ -20,7 +20,7 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.3-0.20250322232337-35a7c28c31ee // indirect
-	github.com/onsi/ginkgo/v2 v2.25.3 // indirect
+	github.com/onsi/ginkgo/v2 v2.26.0 // indirect
 	github.com/onsi/gomega v1.38.2 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/stretchr/testify v1.11.1 // indirect
