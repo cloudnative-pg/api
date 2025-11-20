@@ -19,12 +19,12 @@ jobs:
       contents: write
     steps:
       - name: Checkout API repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           token: ${{ secrets.REPO_PAT }}
 
       - name: Checkout cloudnative-pg repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           path: cloudnative-pg
           repository: cloudnative-pg/cloudnative-pg
