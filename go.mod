@@ -7,7 +7,7 @@ toolchain go1.25.5
 require (
 	github.com/cloudnative-pg/barman-cloud v0.4.0
 	github.com/cloudnative-pg/machinery v0.3.3
-	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.86.2
+	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.87.1
 	k8s.io/api v0.35.0
 	k8s.io/apimachinery v0.35.0
 	sigs.k8s.io/controller-runtime v0.22.4
