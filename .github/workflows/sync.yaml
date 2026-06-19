@@ -36,26 +36,89 @@ jobs:
           path: cloudnative-pg
           repository: cloudnative-pg/cloudnative-pg
           sparse-checkout: api/v1
+          # Full history is required to replay each upstream commit individually.
+          fetch-depth: 0
 
       - name: Setup Go
         uses: actions/setup-go@v6
         with:
           go-version-file:  cloudnative-pg/go.mod
 
-      - name: Copy types files from cloudnative-pg
+      # Replay every upstream commit that touched the synced files as an individual
+      # commit, reusing the original message and appending a
+      # "(cherry picked from commit <sha>)" trailer (like `git cherry-pick -x`).
+      # A literal cherry-pick is impossible because this repository rewrites the
+      # module path and relocates the files to pkg/api/v1, so we reproduce each
+      # upstream snapshot instead. The trailer doubles as the sync state anchor.
+      - name: Sync API types from cloudnative-pg
+        env:
+          UPSTREAM: cloudnative-pg/cloudnative-pg
         run: |
-          rm -rf pkg/api/v1
-          mkdir -p pkg/api/v1
-          cp -v cloudnative-pg/api/v1/*_types.go pkg/api/v1
-          cp -v cloudnative-pg/api/v1/doc.go pkg/api/v1
-          cp -v cloudnative-pg/api/v1/groupversion_info.go pkg/api/v1
-          cp -v cloudnative-pg/api/v1/zz_*.go pkg/api/v1
-          cp -v cloudnative-pg/go.mod cloudnative-pg/go.sum .
-          sed -i  '1 s|^.*$|module github.com/cloudnative-pg/api|' go.mod
-          go mod tidy
-          go vet ./...
+          set -euo pipefail
 
-      # We want to prevent the "include administrators" branch protection from blocking the commit,
+          git config user.name "CloudNativePG Automated Updates"
+          git config user.email "noreply@cnpg.com"
+
+          # Find the last synced upstream commit recorded in our history. Our own
+          # trailer is always the final line of the body, so take the last match
+          # (upstream backport commits may carry their own cherry-pick line too).
+          # The trailing hex run is the SHA regardless of the "<owner>/<repo>@"
+          # prefix we add for cross-repo linking.
+          LAST=$(git log --grep='cherry picked from commit' -n1 --pretty=%B \
+            | grep -iE 'cherry picked from commit' \
+            | tail -n1 \
+            | grep -oiE '[0-9a-f]{7,40}' \
+            | tail -n1) || true
+
+          # Build the list of upstream commits to replay, oldest first.
+          if [ -n "${LAST:-}" ]; then
+            mapfile -t COMMITS < <(git -C cloudnative-pg log --reverse --pretty=%H "$LAST..HEAD" -- api/v1 go.mod go.sum)
+          else
+            # Bootstrap: no anchor yet, seed from the current upstream HEAD only.
+            mapfile -t COMMITS < <(git -C cloudnative-pg rev-parse HEAD)
+          fi
+
+          if [ ${#COMMITS[@]} -eq 0 ]; then
+            echo "Already up to date with upstream; nothing to sync."
+            exit 0
+          fi
+
+          for sha in "${COMMITS[@]}"; do
+            git -C cloudnative-pg checkout -q "$sha" -- api/v1 go.mod go.sum
+
+            rm -rf pkg/api/v1
+            mkdir -p pkg/api/v1
+            cp -v cloudnative-pg/api/v1/*_types.go pkg/api/v1
+            cp -v cloudnative-pg/api/v1/doc.go pkg/api/v1
+            cp -v cloudnative-pg/api/v1/groupversion_info.go pkg/api/v1
+            cp -v cloudnative-pg/api/v1/zz_*.go pkg/api/v1
+            cp -v cloudnative-pg/go.mod cloudnative-pg/go.sum .
+            sed -i '1 s|^.*$|module github.com/cloudnative-pg/api|' go.mod
+            go mod tidy
+            go vet ./...
+
+            git add pkg/api/v1 go.mod go.sum
+            if git diff --cached --quiet; then
+              echo "Upstream commit $sha has no net effect on synced files, skipping."
+              continue
+            fi
+
+            GIT_AUTHOR_NAME=$(git -C cloudnative-pg show -s --pretty=%an "$sha")
+            GIT_AUTHOR_EMAIL=$(git -C cloudnative-pg show -s --pretty=%ae "$sha")
+            GIT_AUTHOR_DATE=$(git -C cloudnative-pg show -s --pretty=%aI "$sha")
+            export GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL GIT_AUTHOR_DATE
+
+            # Qualify bare "#NNNN" references so they link to the upstream repo
+            # rather than to issues/PRs in this mirror. The negative lookbehind
+            # keeps already-qualified refs (e.g. owner/repo#7) and "word#7" untouched.
+            MSG=$(git -C cloudnative-pg show -s --pretty=%B "$sha" \
+              | perl -pe 's{(?<![\w/])#(\d+)\b}{$ENV{UPSTREAM}#$1}g')
+            git commit \
+              -m "$MSG" \
+              -m "(cherry picked from commit ${UPSTREAM}@${sha})"
+          done
+
+      # We want to prevent the "include administrators" branch protection from blocking the push,
       # but it should be usually there to avoid accidental pushes to main.
       - name: Temporarily disable "include administrators" branch protection
         if: ${{ github.ref == 'refs/heads/main' }}
@@ -66,12 +129,8 @@ jobs:
           branch: main
           enforce_admins: false
 
-      - uses: EndBug/add-and-commit@v10
-        with:
-          author_name: CloudNativePG Automated Updates
-          author_email: noreply@cnpg.com
-          message: 'chore: sync API'
-          add: pkg/api/v1 go.mod go.sum
+      - name: Push synced commits
+        run: git push origin "HEAD:${GITHUB_REF_NAME}"
 
       - name: Enable "include administrators" branch protection
         uses: benjefferies/branch-protection-bot@v1.1.2
