@@ -12,6 +12,13 @@ on:
 
 permissions: read-all
 
+# A release dispatches a tag-carrying sync while the push to main triggers a
+# second, tag-less sync. Serialize them so they don't race on the commit to main
+# and the tag-carrying run tags the already-synced commit.
+concurrency:
+  group: sync-api
+  cancel-in-progress: false
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -73,3 +80,18 @@ jobs:
           access_token: ${{ secrets.REPO_PAT }}
           branch: main
           enforce_admins: ${{ steps.disable_include_admins.outputs.initial_status }}
+
+      # When the sync is triggered by a release, the cloudnative-pg release-tag
+      # workflow passes the release tag in the dispatch payload. Tag the freshly
+      # synced commit so the API repository keeps the same tags as cloudnative-pg.
+      - name: Tag the synced release
+        if: ${{ github.event_name == 'repository_dispatch' && github.event.client_payload.tag != '' }}
+        env:
+          TAG: ${{ github.event.client_payload.tag }}
+        run: |
+          if git ls-remote --tags origin "refs/tags/${TAG}" | grep -q .; then
+            echo "Tag ${TAG} already exists, nothing to do."
+            exit 0
+          fi
+          git tag "${TAG}"
+          git push origin "${TAG}"
