@@ -1,5 +1,5 @@
-github.com/Masterminds/semver/v3 v3.5.0 h1:kQceYJfbupGfZOKZQg0kou0DgAKhzDg2NZPAwZ/2OOE=
-github.com/Masterminds/semver/v3 v3.5.0/go.mod h1:4V+yj/TJE1HU9XfppCwVMZq3I84lprf4nC11bSS5beM=
+github.com/Masterminds/semver/v3 v3.4.0 h1:Zog+i5UMtVoCU8oKka5P7i9q9HgrJeGzI9SA1Xbatp0=
+github.com/Masterminds/semver/v3 v3.4.0/go.mod h1:4V+yj/TJE1HU9XfppCwVMZq3I84lprf4nC11bSS5beM=
 github.com/cloudnative-pg/barman-cloud v0.5.1 h1:vjkXrrxo2DQXHT9u9usqhtaHiPZ/lTfDVs/pIWYTepQ=
 github.com/cloudnative-pg/barman-cloud v0.5.1/go.mod h1:XPc5IUFP1y4cZX1sg+Pd8j9V4tmUEVnv3BGCpfQOOg8=
 github.com/cloudnative-pg/machinery v0.5.0 h1:hhTnkzn+AiN3NmbjCQ6RXj5rfqV3K6arzq6kdXAzcnQ=
