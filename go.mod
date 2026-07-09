@@ -1,6 +1,6 @@
 module github.com/cloudnative-pg/api
 
-go 1.26.4
+go 1.26.5
 
 require (
 	github.com/cloudnative-pg/barman-cloud v0.5.1
