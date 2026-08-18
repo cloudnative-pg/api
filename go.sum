@@ -1,7 +1,7 @@
 github.com/Masterminds/semver/v3 v3.5.0 h1:kQceYJfbupGfZOKZQg0kou0DgAKhzDg2NZPAwZ/2OOE=
 github.com/Masterminds/semver/v3 v3.5.0/go.mod h1:4V+yj/TJE1HU9XfppCwVMZq3I84lprf4nC11bSS5beM=
-github.com/cloudnative-pg/barman-cloud v0.5.1 h1:vjkXrrxo2DQXHT9u9usqhtaHiPZ/lTfDVs/pIWYTepQ=
-github.com/cloudnative-pg/barman-cloud v0.5.1/go.mod h1:XPc5IUFP1y4cZX1sg+Pd8j9V4tmUEVnv3BGCpfQOOg8=
+github.com/cloudnative-pg/barman-cloud v0.5.2-0.20260720143032-950b0f57e122 h1:NuOztBdp+bUr/xYtaAw8o/x880hvWDRhJGl+R1YsZNw=
+github.com/cloudnative-pg/barman-cloud v0.5.2-0.20260720143032-950b0f57e122/go.mod h1:ZQLkdpk44FW5/BGWzABTOEcV9qPbwC+rbdscg2I8mBI=
 github.com/cloudnative-pg/machinery v0.5.1-0.20260728155247-4d1e61111d7c h1:Oq8J4W7QtGk1dUoNtnnKiR7Sw1iSc7T3ZzvcP7q+46A=
 github.com/cloudnative-pg/machinery v0.5.1-0.20260728155247-4d1e61111d7c/go.mod h1:XCchEmfW41gac9u8P7tYAF3OKSELcu+4KBLMs93kDfc=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
