@@ -3,8 +3,8 @@ module github.com/cloudnative-pg/api
 go 1.26.6
 
 require (
-	github.com/cloudnative-pg/barman-cloud v0.5.2-0.20260720143032-950b0f57e122
-	github.com/cloudnative-pg/machinery v0.5.1-0.20260728155247-4d1e61111d7c
+	github.com/cloudnative-pg/barman-cloud v0.6.0
+	github.com/cloudnative-pg/machinery v0.6.0
 	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.92.1
 	k8s.io/api v0.37.0
 	k8s.io/apimachinery v0.37.0
@@ -17,8 +17,6 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.3-0.20250322232337-35a7c28c31ee // indirect
-	github.com/onsi/ginkgo/v2 v2.32.1 // indirect
-	github.com/onsi/gomega v1.43.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	go.yaml.in/yaml/v2 v2.4.4 // indirect
 	go.yaml.in/yaml/v3 v3.0.5 // indirect
