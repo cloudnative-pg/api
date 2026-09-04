@@ -2,6 +2,8 @@ module github.com/cloudnative-pg/api
 
 go 1.26.6
 
+toolchain go1.27.1
+
 require (
 	github.com/cloudnative-pg/barman-cloud v0.6.0
 	github.com/cloudnative-pg/machinery v0.6.0
