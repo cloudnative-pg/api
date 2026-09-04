@@ -34,8 +34,8 @@ github.com/onsi/gomega v1.43.0/go.mod h1:REff/hsDsodHoKlWsP2mAPhu1+5/6hVYNf9rIEB
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 h1:Jamvg5psRIccs7FGNTlIRMkT8wgtp5eCXdBlqhYGL6U=
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
-github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.92.1 h1:MR19V0wQ1ymlsURnlODjcnsVrClhclUgZMnbn6A+aRs=
-github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.92.1/go.mod h1:eGo3VN8Kq5Fd0M7Cdx0oqbIxo753t99ojUZFVQkO1UM=
+github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.93.1 h1:RP+/GISMkna7VpDx3wa52oYIyIjNU+iQxV6sDnY2uCA=
+github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.93.1/go.mod h1:rZ+wRKDneCC/jJk24Mdb+6bAc6y/UjRliuMz6U20s6Y=
 github.com/spf13/pflag v1.0.10 h1:4EBh2KAYBwaONj6b2Ye1GiHfwjqyROoF4RwYO+vPwFk=
 github.com/spf13/pflag v1.0.10/go.mod h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An2Bg=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
