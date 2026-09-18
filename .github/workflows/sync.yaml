@@ -118,43 +118,8 @@ jobs:
               -m "(cherry picked from commit ${UPSTREAM}@${sha})"
           done
 
-      # We want to prevent the "include administrators" branch protection from blocking the push,
-      # but it should be usually there to avoid accidental pushes to main.
-      - name: Temporarily disable "include administrators" branch protection
-        if: always() && github.ref == 'refs/heads/main'
-        id: disable_include_admins
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
-        with:
-          github-token: ${{ secrets.REPO_PAT }}
-          script: |
-            const params = {
-              owner: 'cloudnative-pg',
-              repo: 'api',
-              branch: 'main',
-            };
-            const { data } = await github.rest.repos.getAdminBranchProtection(params);
-            core.setOutput('initial_status', data.enabled);
-            if (data.enabled) {
-              await github.rest.repos.deleteAdminBranchProtection(params);
-            }
-
       - name: Push synced commits
         run: git push origin "HEAD:${GITHUB_REF_NAME}"
-
-      - name: Restore "include administrators" branch protection
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
-        if: |
-          always() &&
-          github.ref == 'refs/heads/main' &&
-          steps.disable_include_admins.outputs.initial_status == 'true'
-        with:
-          github-token: ${{ secrets.REPO_PAT }}
-          script: |
-            await github.rest.repos.setAdminBranchProtection({
-              owner: 'cloudnative-pg',
-              repo: 'api',
-              branch: 'main',
-            });
 
       # When the sync is triggered by a release, the cloudnative-pg release-tag
       # workflow passes the release tag in the dispatch payload. Tag the freshly
